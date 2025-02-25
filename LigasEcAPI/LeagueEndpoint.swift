@@ -7,6 +7,7 @@
 
 import Foundation
 
+//TODO: Add tests
 public enum LeagueEndpoint {
     case get(country: String, season: String)
     
