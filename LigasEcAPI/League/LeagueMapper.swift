@@ -36,18 +36,13 @@ public final class LeagueMapper {
         }
     }
             
-    public enum Error: Swift.Error {
-        case invalidData
-        case unsuccessfullyResponse
-    }
-    
     public static func map(_ data: Data, from response: HTTPURLResponse) throws -> [League] {
         guard response.isOK else {
-            throw Error.unsuccessfullyResponse
+            throw MapperError.unsuccessfullyResponse
         }
         
         do {
-            print(String(data: data, encoding: .utf8) ?? "No Data")
+            //print(String(data: data, encoding: .utf8) ?? "No Data")
             let root = try JSONDecoder().decode(Root.self, from: data)
             return root.leagues
         } catch {
@@ -62,6 +57,10 @@ extension HTTPURLResponse {
     var isOK: Bool {
         return statusCode == HTTPURLResponse.OK_200
     }
+}
+
+public enum MapperError: Error {
+    case unsuccessfullyResponse
 }
 
 public struct League: Hashable, Identifiable {
