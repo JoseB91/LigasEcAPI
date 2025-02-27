@@ -64,6 +64,17 @@
 		B0FFEDB72D690E110058D1C0 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B09584452D6F6EB900C4B206 /* Exceptions for "Player" folder in "LigasEcAPI" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				PlayerEndpoint.swift,
+				PlayerMapper.swift,
+			);
+			target = B00CDFDC2D6C150C00050613 /* LigasEcAPI */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B095842E2D6E628500C4B206 /* League */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -73,6 +84,14 @@
 		B095843D2D6F6BD100C4B206 /* Team */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Team;
+			sourceTree = "<group>";
+		};
+		B09584412D6F6C7200C4B206 /* Player */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B09584452D6F6EB900C4B206 /* Exceptions for "Player" folder in "LigasEcAPI" target */,
+			);
+			path = Player;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -114,9 +133,10 @@
 		B00CDFF72D6C151D00050613 /* LigasEcAPI */ = {
 			isa = PBXGroup;
 			children = (
+				B09584412D6F6C7200C4B206 /* Player */,
+				B00CDFFA2D6C152400050613 /* Header & Doc */,
 				B095843D2D6F6BD100C4B206 /* Team */,
 				B095842E2D6E628500C4B206 /* League */,
-				B00CDFFA2D6C152400050613 /* Header & Doc */,
 			);
 			path = LigasEcAPI;
 			sourceTree = "<group>";

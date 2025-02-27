@@ -1,26 +1,25 @@
 //
-//  TeamEndpoint.swift
+//  PlayerEndpoint.swift
 //  LigasEcAPI
 //
-//  Created by José Briones on 25/2/25.
+//  Created by José Briones on 26/2/25.
 //
 
 import Foundation
 
 //TODO: Add tests
-public enum TeamEndpoint {
-    case get(leagueId: Int, season: String)
+public enum PlayerEndpoint {
+    case get(teamId: Int)
     
     public func url(baseURL: URL) -> URL {
         switch self {
-        case let .get(leagueId, season):
+        case let .get(teamId):
             var components = URLComponents()
             components.scheme = baseURL.scheme
             components.host = baseURL.host
-            components.path = baseURL.path + "/teams"
+            components.path = baseURL.path + "/players" + "/squads"
             components.queryItems = [
-                URLQueryItem(name: "league", value: "\(leagueId)"),
-                URLQueryItem(name: "season", value: "\(season)")
+                URLQueryItem(name: "team", value: "\(teamId)")
             ].compactMap { $0 }
             return components.url!
         }
