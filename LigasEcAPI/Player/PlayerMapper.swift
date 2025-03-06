@@ -9,37 +9,62 @@ import Foundation
 
 public final class PlayerMapper {
     // TODO: Pagination
-    private struct Root: Decodable {
-        let response: [Response]
+    
+    
+    // MARK: - Root
+    private struct Root: Codable {
+        let data: [Datum]
         
         var squad: [Player] {
-            guard let firtResponse = response.first else { return [] }
-            return firtResponse.players.compactMap {
-                Player(id: $0.id,
-                       name: $0.name,
-                       age: $0.age,
-                       number: $0.number ?? 0,
-                       position: $0.position,
-                       photoURL: $0.photo)
+            data.flatMap { group in
+                group.items.compactMap { item in
+                    Player(id: item.playerID,
+                           name: item.playerName,
+                           number: item.playerJerseyNumber ?? 0,
+                           position: item.playerTypeID.rawValue,
+                           photoURL: item.playerImagePath)
+                }
             }
         }
-                            
-        struct Response: Codable {
-            let team: ResponseTeam
-            let players: [ResponsePlayer]
-            struct ResponseTeam: Codable {
-                let id: Int
-                let name: String
-                let logo: URL
+        
+        enum CodingKeys: String, CodingKey {
+            case data = "DATA"
+        }
+        
+        struct Datum: Codable {
+            let groupID: Int
+            let groupLabel: String
+            let items: [Item]
+
+            enum CodingKeys: String, CodingKey {
+                case groupID = "GROUP_ID"
+                case groupLabel = "GROUP_LABEL"
+                case items = "ITEMS"
             }
             
-            struct ResponsePlayer: Codable {
-                let id: Int
-                let name: String
-                let age: Int
-                let number: Int?
-                let position: String
-                let photo: URL
+            struct Item: Codable {
+                let playerID, playerName: String
+                let playerTypeID: PlayerTypeID
+                let playerJerseyNumber: Int?
+                let playerFlagID: Int
+                let playerImagePath: URL?
+
+                enum CodingKeys: String, CodingKey {
+                    case playerID = "PLAYER_ID"
+                    case playerName = "PLAYER_NAME"
+                    case playerTypeID = "PLAYER_TYPE_ID"
+                    case playerJerseyNumber = "PLAYER_JERSEY_NUMBER"
+                    case playerFlagID = "PLAYER_FLAG_ID"
+                    case playerImagePath = "PLAYER_IMAGE_PATH"
+                }
+            }
+            
+            enum PlayerTypeID: String, Codable {
+                case coach = "COACH"
+                case defender = "DEFENDER"
+                case forward = "FORWARD"
+                case goalkeeper = "GOALKEEPER"
+                case midfielder = "MIDFIELDER"
             }
         }
     }
@@ -54,45 +79,23 @@ public final class PlayerMapper {
             let root = try JSONDecoder().decode(Root.self, from: data)
             return root.squad
         } catch {
-            print(error)
             throw error
         }
     }
 }
 
 public struct Player: Hashable, Identifiable {
-    public let id: Int
+    public let id: String
     public let name: String
-    public let age: Int
     public let number: Int
     public let position: String
-    public let photoURL: URL
+    public let photoURL: URL?
     
-    public init(id: Int, name: String, age: Int, number: Int, position: String, photoURL: URL) {
+    public init(id: String, name: String, number: Int, position: String, photoURL: URL?) {
         self.id = id
         self.name = name
-        self.age = age
         self.number = number
         self.position = position
         self.photoURL = photoURL
     }
 }
-
-//"response": [{
-//    "team":
-//    {
-//        "id": 33,
-//        "name": "Manchester United",
-//        "logo": "https://media.api-sports.io/football/teams/33.png"
-//    },
-//    "players":
-//    [
-//        {
-//            "id": 20319,
-//            "name": "N. Bishop",
-//            "age": 22,
-//            "number": 30,
-//            "position": "Goalkeeper",
-//            "photo": "https://media.api-sports.io/football/players/20319.png"
-//        }]
-//}]

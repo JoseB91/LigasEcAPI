@@ -8,16 +8,50 @@
 import Foundation
 
 public final class TeamMapper {
-    // TODO: Pagination
-    private struct Root: Decodable {
-        let response: [Response]
-        
+    
+    // TODO: Pagination    
+    private struct Root: Codable {
+        let data: [Datum]
+
         var teams: [Team] {
-            response.compactMap { Team(id: $0.team.id,
-                                         name: $0.team.name,
-                                         logoURL: $0.team.logo)
+            guard let firstData = data.first else { return [] }
+            return firstData.rows.compactMap { Team(id: $0.teamID,
+                                               name: $0.teamName,
+                                               logoURL: $0.teamImagePath)
             }
         }
+
+        enum CodingKeys: String, CodingKey {
+            case data = "DATA"
+        }
+        
+        struct Datum: Codable {
+            let rows: [Row]
+
+            enum CodingKeys: String, CodingKey {
+                case rows = "ROWS"
+            }
+        }
+        
+        struct Row: Codable {
+            let ranking: Int
+            let teamName, teamID: String
+            let teamImagePath: URL
+
+            enum CodingKeys: String, CodingKey {
+                case ranking = "RANKING"
+                case teamName = "TEAM_NAME"
+                case teamID = "TEAM_ID"
+                case teamImagePath = "TEAM_IMAGE_PATH"
+            }
+        }
+
+    }
+
+
+    private struct Root2: Decodable {
+        let response: [Response]
+        
                             
         struct Response: Codable {
             let team: ResponseTeam
@@ -36,7 +70,6 @@ public final class TeamMapper {
         }
         
         do {
-            //print(String(data: data, encoding: .utf8) ?? "No Data")
             let root = try JSONDecoder().decode(Root.self, from: data)
             return root.teams
         } catch {
@@ -45,35 +78,27 @@ public final class TeamMapper {
     }
 }
 
+extension HTTPURLResponse {
+    private static var OK_200: Int { return 200 }
+
+    var isOK: Bool {
+        return statusCode == HTTPURLResponse.OK_200
+    }
+}
+
+public enum MapperError: Error {
+    case unsuccessfullyResponse
+}
+
 public struct Team: Hashable, Identifiable {
-    public let id: Int
+    public let id: String
     public let name: String
     public let logoURL: URL
     
-    public init(id: Int, name: String, logoURL: URL) {
+    public init(id: String, name: String, logoURL: URL) {
         self.id = id
         self.name = name
         self.logoURL = logoURL
     }
 }
 
-//"response": [{
-//"team": {
-//    "id": 33,
-//    "name": "Manchester United",
-//    "code": "MUN",
-//    "country": "England",
-//    "founded": 1878,
-//    "national": false,
-//    "logo": "https://media.api-sports.io/football/teams/33.png"
-//},
-//"venue":{
-//            "id": 556,
-//            "name": "Old Trafford",
-//            "address": "Sir Matt Busby Way",
-//            "city": "Manchester",
-//            "capacity": 76212,
-//            "surface": "grass",
-//            "image": "https://media.api-sports.io/football/venues/556.png"
-//        }
-//    }]

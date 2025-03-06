@@ -20,14 +20,6 @@ final class APIEndToEndTests: XCTestCase {
         XCTAssertEqual(leagues[0], makeLeagueItem())
     }
     
-    func test_endToEndServerGETImageResult_hasImage() async throws {
-        // Act
-        let imageData = try await getLeagueImageResult()
-        
-        // Assert
-        XCTAssertFalse(imageData.isEmpty, "Expected non-empty image data")
-    }
-    
     // MARK: - Helpers
     private func getLeagueResult(file: StaticString = #filePath, line: UInt = #line) async throws -> [League] {
         let client = ephemeralClient()
@@ -41,18 +33,9 @@ final class APIEndToEndTests: XCTestCase {
         
         return try LeagueMapper.map(data, from: response)
     }
-        
-    private func getLeagueImageResult(file: StaticString = #file, line: UInt = #line) async throws -> Data {
-        let client = ephemeralClient()
-        let url = imageServerURL.appendingPathComponent("leagues/243.png")
-        
-        let (data, response) = try await client.get(from: url)
-
-        return try ImageMapper.map(data, from: response)
-    }
-
+    
     private var leagueServerURL: URL {
-        return URL(string: "https://v3.football.api-sports.io")!
+        return URL(string: "https://flashlive-sports.p.rapidapi.com/v1/")!
     }
     
     private var imageServerURL: URL {
@@ -60,7 +43,7 @@ final class APIEndToEndTests: XCTestCase {
     }
         
     private func ephemeralClient(file: StaticString = #file, line: UInt = #line) -> HTTPClient {
-        let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral), apiKey: "c3f7e1d18170e13fe81a3a865b4cf1b3")
+        let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral), apiKey: "d319699dffmsh2e7252b38ac2105p14d2b1jsne003798e4ef8")
         trackForMemoryLeaks(client, file: file, line: line)
         return client
     }

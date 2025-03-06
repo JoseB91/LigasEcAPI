@@ -10,7 +10,6 @@
 		B00CDFE72D6C150C00050613 /* LigasEcAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00CDFDD2D6C150C00050613 /* LigasEcAPI.framework */; };
 		B00CDFF82D6C151D00050613 /* LigasEcAPI.docc in Sources */ = {isa = PBXBuildFile; fileRef = B00CDFF62D6C151D00050613 /* LigasEcAPI.docc */; };
 		B00CDFF92D6C151D00050613 /* LigasEcAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = B00CDFF52D6C151D00050613 /* LigasEcAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B00CE1532D6C260200050613 /* ImageMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00CE1502D6C260200050613 /* ImageMapperTests.swift */; };
 		B00CE1542D6C260200050613 /* LeagueMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00CE1512D6C260200050613 /* LeagueMapperTests.swift */; };
 		B00CE15A2D6C260A00050613 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00CE1552D6C260A00050613 /* SharedTestHelpers.swift */; };
 		B00CE15B2D6C260A00050613 /* URLSessionSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00CE1562D6C260A00050613 /* URLSessionSpy.swift */; };
@@ -47,7 +46,6 @@
 		B00CDFE62D6C150C00050613 /* LigasEcAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LigasEcAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00CDFF52D6C151D00050613 /* LigasEcAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LigasEcAPI.h; sourceTree = "<group>"; };
 		B00CDFF62D6C151D00050613 /* LigasEcAPI.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = LigasEcAPI.docc; sourceTree = "<group>"; };
-		B00CE1502D6C260200050613 /* ImageMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMapperTests.swift; sourceTree = "<group>"; };
 		B00CE1512D6C260200050613 /* LeagueMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueMapperTests.swift; sourceTree = "<group>"; };
 		B00CE1552D6C260A00050613 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		B00CE1562D6C260A00050613 /* URLSessionSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionSpy.swift; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				B00CE1512D6C260200050613 /* LeagueMapperTests.swift */,
-				B00CE1502D6C260200050613 /* ImageMapperTests.swift */,
 				B09583D12D6D182F00C4B206 /* APIEndToEndTests.swift */,
 			);
 			path = LigasEcAPITests;
@@ -428,7 +425,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B00CE1532D6C260200050613 /* ImageMapperTests.swift in Sources */,
 				B00CE1542D6C260200050613 /* LeagueMapperTests.swift in Sources */,
 				B00CE15D2D6C260A00050613 /* SharedTestHelpers.swift in Sources */,
 				B09583D22D6D182F00C4B206 /* APIEndToEndTests.swift in Sources */,
