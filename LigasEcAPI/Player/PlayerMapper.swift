@@ -10,65 +10,33 @@ import Foundation
 public final class PlayerMapper {
     // TODO: Pagination
     
-    
-    // MARK: - Root
     private struct Root: Codable {
-        let data: [Datum]
+        let players: [PlayerResponse]
         
         var squad: [Player] {
-            data.flatMap { group in
-                group.items.compactMap { item in
-                    Player(id: item.playerID,
-                           name: item.playerName,
-                           number: item.playerJerseyNumber ?? 0,
-                           position: item.playerTypeID.rawValue,
-                           photoURL: item.playerImagePath)
-                }
+            players.compactMap { Player(id: $0.player.id,
+                                        name: $0.player.name,
+                                        number: $0.player.shirtNumber,
+                                        position: $0.player.position)
             }
         }
-        
-        enum CodingKeys: String, CodingKey {
-            case data = "DATA"
-        }
-        
-        struct Datum: Codable {
-            let groupID: Int
-            let groupLabel: String
-            let items: [Item]
-
-            enum CodingKeys: String, CodingKey {
-                case groupID = "GROUP_ID"
-                case groupLabel = "GROUP_LABEL"
-                case items = "ITEMS"
-            }
             
-            struct Item: Codable {
-                let playerID, playerName: String
-                let playerTypeID: PlayerTypeID
-                let playerJerseyNumber: Int?
-                let playerFlagID: Int
-                let playerImagePath: URL?
-
-                enum CodingKeys: String, CodingKey {
-                    case playerID = "PLAYER_ID"
-                    case playerName = "PLAYER_NAME"
-                    case playerTypeID = "PLAYER_TYPE_ID"
-                    case playerJerseyNumber = "PLAYER_JERSEY_NUMBER"
-                    case playerFlagID = "PLAYER_FLAG_ID"
-                    case playerImagePath = "PLAYER_IMAGE_PATH"
-                }
-            }
+        struct PlayerResponse: Codable {
+            let player: PlayerCodable
             
-            enum PlayerTypeID: String, Codable {
-                case coach = "COACH"
-                case defender = "DEFENDER"
-                case forward = "FORWARD"
-                case goalkeeper = "GOALKEEPER"
-                case midfielder = "MIDFIELDER"
+            struct PlayerCodable: Codable {
+                let name, slug: String
+                let shortName, position: String
+                let jerseyNumber: String?
+                let height: Int?
+                let userCount: Int
+                let id: Int
+                let shirtNumber: Int?
+                let dateOfBirthTimestamp: Int
             }
         }
     }
-            
+                
     public static func map(_ data: Data, from response: HTTPURLResponse) throws -> [Player] {
         guard response.isOK else {
             throw MapperError.unsuccessfullyResponse
@@ -79,19 +47,20 @@ public final class PlayerMapper {
             let root = try JSONDecoder().decode(Root.self, from: data)
             return root.squad
         } catch {
+            print(error)
             throw error
         }
     }
 }
 
 public struct Player: Hashable, Identifiable {
-    public let id: String
+    public let id: Int
     public let name: String
-    public let number: Int
+    public let number: Int?
     public let position: String
     public let photoURL: URL?
     
-    public init(id: String, name: String, number: Int, position: String, photoURL: URL?) {
+    public init(id: Int, name: String, number: Int?, position: String, photoURL: URL? = nil) {
         self.id = id
         self.name = name
         self.number = number
