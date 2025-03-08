@@ -7,9 +7,6 @@
 
 import Foundation
 
-//https://flashlive-sports.p.rapidapi.com/v1/tournaments/standings?tournament_season_id=OEW8zvIT&standing_type=home&locale=en_INT&tournament_stage_id=OO37de6i'
-
-//TODO: Add tests
 public enum TeamEndpoint {
     case get(seasonId: String, standingType: String, locale: String, tournamentStageId: String)
     

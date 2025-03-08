@@ -8,9 +8,7 @@
 import Foundation
 
 public final class PlayerMapper {
-    // TODO: Pagination
-    
-    
+        
     // MARK: - Root
     private struct Root: Codable {
         let data: [Datum]

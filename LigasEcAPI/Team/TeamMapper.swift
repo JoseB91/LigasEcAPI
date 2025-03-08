@@ -9,7 +9,6 @@ import Foundation
 
 public final class TeamMapper {
     
-    // TODO: Pagination    
     private struct Root: Codable {
         let data: [Datum]
 
