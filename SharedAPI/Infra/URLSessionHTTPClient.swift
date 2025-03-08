@@ -29,7 +29,7 @@ public final class URLSessionHTTPClient: HTTPClient {
     public func get(from url: URL) async throws -> (Data, HTTPURLResponse) {
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 15.0)
         request.setValue(apiKey, forHTTPHeaderField: "x-rapidapi-key")
-        request.setValue("sportapi7.p.rapidapi.com", forHTTPHeaderField: "x-rapidapi-host") // TODO: Manage constant
+        request.setValue("flashlive-sports.p.rapidapi.com", forHTTPHeaderField: "x-rapidapi-host")
         
         guard let (data, response) = try? await session.data(request: request, delegate: nil) else {
             throw URLError(.cannotLoadFromNetwork)

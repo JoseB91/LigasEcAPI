@@ -9,29 +9,60 @@ import Foundation
 
 public final class TeamMapper {
     
-    // TODO: Pagination
-    struct Root: Codable {
-        let teamsResponse: [TeamResponse]
-        
-        enum CodingKeys: String, CodingKey {
-            case teamsResponse = "teams"
-        }
-        
+    // TODO: Pagination    
+    private struct Root: Codable {
+        let data: [Datum]
+
         var teams: [Team] {
-            teamsResponse.compactMap { Team(id: $0.id,
-                                    name: $0.name,
-                                    shortName: $0.shortName) }
+            guard let firstData = data.first else { return [] }
+            return firstData.rows.compactMap { Team(id: $0.teamID,
+                                               name: $0.teamName,
+                                               logoURL: $0.teamImagePath)
+            }
+        }
+
+        enum CodingKeys: String, CodingKey {
+            case data = "DATA"
         }
         
-        struct TeamResponse: Codable {
-            let name, slug, shortName: String
-            let userCount: Int
-            let nameCode: String
-            let type, id: Int
+        struct Datum: Codable {
+            let rows: [Row]
+
+            enum CodingKeys: String, CodingKey {
+                case rows = "ROWS"
+            }
         }
+        
+        struct Row: Codable {
+            let ranking: Int
+            let teamName, teamID: String
+            let teamImagePath: URL
+
+            enum CodingKeys: String, CodingKey {
+                case ranking = "RANKING"
+                case teamName = "TEAM_NAME"
+                case teamID = "TEAM_ID"
+                case teamImagePath = "TEAM_IMAGE_PATH"
+            }
+        }
+
     }
 
 
+    private struct Root2: Decodable {
+        let response: [Response]
+        
+                            
+        struct Response: Codable {
+            let team: ResponseTeam
+           
+            struct ResponseTeam: Codable {
+                let id: Int
+                let name: String
+                let logo: URL
+            }
+        }
+    }
             
     public static func map(_ data: Data, from response: HTTPURLResponse) throws -> [Team] {
         guard response.isOK else {
@@ -60,15 +91,13 @@ public enum MapperError: Error {
 }
 
 public struct Team: Hashable, Identifiable {
-    public let id: Int
+    public let id: String
     public let name: String
-    public let shortName: String
-    public let logoURL: URL?
+    public let logoURL: URL
     
-    public init(id: Int, name: String, shortName: String, logoURL: URL? = nil) {
+    public init(id: String, name: String, logoURL: URL) {
         self.id = id
         self.name = name
-        self.shortName = shortName
         self.logoURL = logoURL
     }
 }
