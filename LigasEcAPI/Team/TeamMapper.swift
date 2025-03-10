@@ -100,4 +100,3 @@ public struct Team: Hashable, Identifiable {
         self.logoURL = logoURL
     }
 }
-

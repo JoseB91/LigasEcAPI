@@ -16,11 +16,6 @@
 		B00CE15D2D6C260A00050613 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00CE1552D6C260A00050613 /* SharedTestHelpers.swift */; };
 		B00CE1862D6CC58C00050613 /* SharedAPI.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = B00CE1852D6CC58C00050613 /* SharedAPI.xctestplan */; };
 		B01EB4B92D681E2500859916 /* SharedAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01EB4AE2D681E2500859916 /* SharedAPI.framework */; };
-		B0535F8E2D7C091B00BE41F0 /* TeamEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535F8D2D7C091B00BE41F0 /* TeamEndpointTests.swift */; };
-		B0535F902D7C0B2B00BE41F0 /* PlayerEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535F8F2D7C0B2B00BE41F0 /* PlayerEndpointTests.swift */; };
-		B0535F922D7C0D9A00BE41F0 /* LeagueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0535F912D7C0D9A00BE41F0 /* LeagueTests.swift */; };
-		B0D0C2E92D7BFBFD008CA84C /* TeamMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D0C2E82D7BFBFD008CA84C /* TeamMapperTests.swift */; };
-		B0D0C2ED2D7C0126008CA84C /* PlayerMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D0C2EC2D7C0126008CA84C /* PlayerMapperTests.swift */; };
 		B0FFEDB92D690E110058D1C0 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FFEDB52D690E110058D1C0 /* HTTPClient.swift */; };
 		B0FFEDBA2D690E110058D1C0 /* SharedAPI.docc in Sources */ = {isa = PBXBuildFile; fileRef = B0FFEDB62D690E110058D1C0 /* SharedAPI.docc */; };
 		B0FFEDBB2D690E110058D1C0 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FFEDB72D690E110058D1C0 /* URLSessionHTTPClient.swift */; };
@@ -57,11 +52,6 @@
 		B00CE1872D6CC61D00050613 /* SharedAPI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = SharedAPI.xctestplan; path = SharedAPITests/SharedAPI.xctestplan; sourceTree = "<group>"; };
 		B01EB4AE2D681E2500859916 /* SharedAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SharedAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01EB4B82D681E2500859916 /* SharedAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharedAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0535F8D2D7C091B00BE41F0 /* TeamEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamEndpointTests.swift; sourceTree = "<group>"; };
-		B0535F8F2D7C0B2B00BE41F0 /* PlayerEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerEndpointTests.swift; sourceTree = "<group>"; };
-		B0535F912D7C0D9A00BE41F0 /* LeagueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueTests.swift; sourceTree = "<group>"; };
-		B0D0C2E82D7BFBFD008CA84C /* TeamMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMapperTests.swift; sourceTree = "<group>"; };
-		B0D0C2EC2D7C0126008CA84C /* PlayerMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerMapperTests.swift; sourceTree = "<group>"; };
 		B0FFEDB32D690E110058D1C0 /* SharedAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedAPI.h; sourceTree = "<group>"; };
 		B0FFEDB52D690E110058D1C0 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		B0FFEDB62D690E110058D1C0 /* SharedAPI.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = SharedAPI.docc; sourceTree = "<group>"; };
@@ -80,6 +70,21 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		B05360E12D7F822900BE41F0 /* Player */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Player;
+			sourceTree = "<group>";
+		};
+		B05360E62D7F822C00BE41F0 /* Team */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Team;
+			sourceTree = "<group>";
+		};
+		B05360EA2D7F822E00BE41F0 /* League */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = League;
+			sourceTree = "<group>";
+		};
 		B095842E2D6E628500C4B206 /* League */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = League;
@@ -157,11 +162,9 @@
 		B00CE1522D6C260200050613 /* LigasEcAPITests */ = {
 			isa = PBXGroup;
 			children = (
-				B0D0C2E82D7BFBFD008CA84C /* TeamMapperTests.swift */,
-				B0D0C2EC2D7C0126008CA84C /* PlayerMapperTests.swift */,
-				B0535F8D2D7C091B00BE41F0 /* TeamEndpointTests.swift */,
-				B0535F8F2D7C0B2B00BE41F0 /* PlayerEndpointTests.swift */,
-				B0535F912D7C0D9A00BE41F0 /* LeagueTests.swift */,
+				B05360E12D7F822900BE41F0 /* Player */,
+				B05360E62D7F822C00BE41F0 /* Team */,
+				B05360EA2D7F822E00BE41F0 /* League */,
 			);
 			path = LigasEcAPITests;
 			sourceTree = "<group>";
@@ -294,6 +297,11 @@
 			);
 			dependencies = (
 				B00CDFE92D6C150C00050613 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B05360E12D7F822900BE41F0 /* Player */,
+				B05360E62D7F822C00BE41F0 /* Team */,
+				B05360EA2D7F822E00BE41F0 /* League */,
 			);
 			name = LigasEcAPITests;
 			packageProductDependencies = (
@@ -435,11 +443,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B00CE15D2D6C260A00050613 /* SharedTestHelpers.swift in Sources */,
-				B0535F8E2D7C091B00BE41F0 /* TeamEndpointTests.swift in Sources */,
-				B0D0C2ED2D7C0126008CA84C /* PlayerMapperTests.swift in Sources */,
-				B0535F902D7C0B2B00BE41F0 /* PlayerEndpointTests.swift in Sources */,
-				B0535F922D7C0D9A00BE41F0 /* LeagueTests.swift in Sources */,
-				B0D0C2E92D7BFBFD008CA84C /* TeamMapperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
