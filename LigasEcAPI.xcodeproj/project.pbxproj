@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B00CDFE72D6C150C00050613 /* LigasEcAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00CDFDD2D6C150C00050613 /* LigasEcAPI.framework */; };
-		B00CDFF82D6C151D00050613 /* LigasEcAPI.docc in Sources */ = {isa = PBXBuildFile; fileRef = B00CDFF62D6C151D00050613 /* LigasEcAPI.docc */; };
-		B00CDFF92D6C151D00050613 /* LigasEcAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = B00CDFF52D6C151D00050613 /* LigasEcAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B00CE15A2D6C260A00050613 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00CE1552D6C260A00050613 /* SharedTestHelpers.swift */; };
 		B00CE15B2D6C260A00050613 /* URLSessionSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00CE1562D6C260A00050613 /* URLSessionSpy.swift */; };
 		B00CE15C2D6C260A00050613 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00CE1582D6C260A00050613 /* URLSessionHTTPClientTests.swift */; };
@@ -17,10 +15,8 @@
 		B00CE1862D6CC58C00050613 /* SharedAPI.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = B00CE1852D6CC58C00050613 /* SharedAPI.xctestplan */; };
 		B01EB4B92D681E2500859916 /* SharedAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01EB4AE2D681E2500859916 /* SharedAPI.framework */; };
 		B05361432D8207E600BE41F0 /* ImageMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05361422D8207E600BE41F0 /* ImageMapper.swift */; };
+		B053614C2D8219CC00BE41F0 /* ImageMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B053614B2D8219CC00BE41F0 /* ImageMapperTests.swift */; };
 		B0FFEDB92D690E110058D1C0 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FFEDB52D690E110058D1C0 /* HTTPClient.swift */; };
-		B0FFEDBA2D690E110058D1C0 /* SharedAPI.docc in Sources */ = {isa = PBXBuildFile; fileRef = B0FFEDB62D690E110058D1C0 /* SharedAPI.docc */; };
-		B0FFEDBB2D690E110058D1C0 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FFEDB72D690E110058D1C0 /* URLSessionHTTPClient.swift */; };
-		B0FFEDBC2D690E110058D1C0 /* SharedAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FFEDB32D690E110058D1C0 /* SharedAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,8 +39,6 @@
 /* Begin PBXFileReference section */
 		B00CDFDD2D6C150C00050613 /* LigasEcAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LigasEcAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00CDFE62D6C150C00050613 /* LigasEcAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LigasEcAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B00CDFF52D6C151D00050613 /* LigasEcAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LigasEcAPI.h; sourceTree = "<group>"; };
-		B00CDFF62D6C151D00050613 /* LigasEcAPI.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = LigasEcAPI.docc; sourceTree = "<group>"; };
 		B00CE1552D6C260A00050613 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		B00CE1562D6C260A00050613 /* URLSessionSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionSpy.swift; sourceTree = "<group>"; };
 		B00CE1582D6C260A00050613 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
@@ -54,13 +48,25 @@
 		B01EB4AE2D681E2500859916 /* SharedAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SharedAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01EB4B82D681E2500859916 /* SharedAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharedAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B05361422D8207E600BE41F0 /* ImageMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMapper.swift; sourceTree = "<group>"; };
-		B0FFEDB32D690E110058D1C0 /* SharedAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedAPI.h; sourceTree = "<group>"; };
+		B053614B2D8219CC00BE41F0 /* ImageMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMapperTests.swift; sourceTree = "<group>"; };
 		B0FFEDB52D690E110058D1C0 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
-		B0FFEDB62D690E110058D1C0 /* SharedAPI.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = SharedAPI.docc; sourceTree = "<group>"; };
-		B0FFEDB72D690E110058D1C0 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B05361552D821A9B00BE41F0 /* Exceptions for "Header & Doc" folder in "SharedAPI" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			publicHeaders = (
+				SharedAPI.h,
+			);
+			target = B01EB4AD2D681E2500859916 /* SharedAPI */;
+		};
+		B053615B2D821AA200BE41F0 /* Exceptions for "Header & Doc" folder in "LigasEcAPI" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			publicHeaders = (
+				LigasEcAPI.h,
+			);
+			target = B00CDFDC2D6C150C00050613 /* LigasEcAPI */;
+		};
 		B09584452D6F6EB900C4B206 /* Exceptions for "Player" folder in "LigasEcAPI" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -85,6 +91,27 @@
 		B05360EA2D7F822E00BE41F0 /* League */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = League;
+			sourceTree = "<group>";
+		};
+		B053614E2D821A9000BE41F0 /* Infra */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Infra;
+			sourceTree = "<group>";
+		};
+		B05361522D821A9B00BE41F0 /* Header & Doc */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B05361552D821A9B00BE41F0 /* Exceptions for "Header & Doc" folder in "SharedAPI" target */,
+			);
+			path = "Header & Doc";
+			sourceTree = "<group>";
+		};
+		B05361582D821AA100BE41F0 /* Header & Doc */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B053615B2D821AA200BE41F0 /* Exceptions for "Header & Doc" folder in "LigasEcAPI" target */,
+			);
+			path = "Header & Doc";
 			sourceTree = "<group>";
 		};
 		B095842E2D6E628500C4B206 /* League */ = {
@@ -144,30 +171,22 @@
 		B00CDFF72D6C151D00050613 /* LigasEcAPI */ = {
 			isa = PBXGroup;
 			children = (
-				B09584412D6F6C7200C4B206 /* Player */,
-				B00CDFFA2D6C152400050613 /* Header & Doc */,
-				B095843D2D6F6BD100C4B206 /* Team */,
+				B05361582D821AA100BE41F0 /* Header & Doc */,
 				B095842E2D6E628500C4B206 /* League */,
+				B095843D2D6F6BD100C4B206 /* Team */,
+				B09584412D6F6C7200C4B206 /* Player */,
 				B05361422D8207E600BE41F0 /* ImageMapper.swift */,
 			);
 			path = LigasEcAPI;
 			sourceTree = "<group>";
 		};
-		B00CDFFA2D6C152400050613 /* Header & Doc */ = {
-			isa = PBXGroup;
-			children = (
-				B00CDFF52D6C151D00050613 /* LigasEcAPI.h */,
-				B00CDFF62D6C151D00050613 /* LigasEcAPI.docc */,
-			);
-			path = "Header & Doc";
-			sourceTree = "<group>";
-		};
 		B00CE1522D6C260200050613 /* LigasEcAPITests */ = {
 			isa = PBXGroup;
 			children = (
-				B05360E12D7F822900BE41F0 /* Player */,
-				B05360E62D7F822C00BE41F0 /* Team */,
 				B05360EA2D7F822E00BE41F0 /* League */,
+				B05360E62D7F822C00BE41F0 /* Team */,
+				B05360E12D7F822900BE41F0 /* Player */,
+				B053614B2D8219CC00BE41F0 /* ImageMapperTests.swift */,
 			);
 			path = LigasEcAPITests;
 			sourceTree = "<group>";
@@ -215,31 +234,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B0FFEDB42D690E110058D1C0 /* Header & Doc */ = {
-			isa = PBXGroup;
-			children = (
-				B0FFEDB32D690E110058D1C0 /* SharedAPI.h */,
-				B0FFEDB62D690E110058D1C0 /* SharedAPI.docc */,
-			);
-			path = "Header & Doc";
-			sourceTree = "<group>";
-		};
 		B0FFEDB82D690E110058D1C0 /* SharedAPI */ = {
 			isa = PBXGroup;
 			children = (
-				B0FFEDB42D690E110058D1C0 /* Header & Doc */,
+				B05361522D821A9B00BE41F0 /* Header & Doc */,
+				B053614E2D821A9000BE41F0 /* Infra */,
 				B0FFEDB52D690E110058D1C0 /* HTTPClient.swift */,
-				B0FFEDBD2D690E530058D1C0 /* Infra */,
 			);
 			path = SharedAPI;
-			sourceTree = "<group>";
-		};
-		B0FFEDBD2D690E530058D1C0 /* Infra */ = {
-			isa = PBXGroup;
-			children = (
-				B0FFEDB72D690E110058D1C0 /* URLSessionHTTPClient.swift */,
-			);
-			path = Infra;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,7 +251,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B00CDFF92D6C151D00050613 /* LigasEcAPI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +258,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0FFEDBC2D690E110058D1C0 /* SharedAPI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +278,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				B05361582D821AA100BE41F0 /* Header & Doc */,
 				B095842E2D6E628500C4B206 /* League */,
 				B095843D2D6F6BD100C4B206 /* Team */,
 			);
@@ -325,6 +326,10 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B053614E2D821A9000BE41F0 /* Infra */,
+				B05361522D821A9B00BE41F0 /* Header & Doc */,
 			);
 			name = SharedAPI;
 			packageProductDependencies = (
@@ -438,7 +443,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B05361432D8207E600BE41F0 /* ImageMapper.swift in Sources */,
-				B00CDFF82D6C151D00050613 /* LigasEcAPI.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B00CE15D2D6C260A00050613 /* SharedTestHelpers.swift in Sources */,
+				B053614C2D8219CC00BE41F0 /* ImageMapperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,8 +460,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0FFEDB92D690E110058D1C0 /* HTTPClient.swift in Sources */,
-				B0FFEDBA2D690E110058D1C0 /* SharedAPI.docc in Sources */,
-				B0FFEDBB2D690E110058D1C0 /* URLSessionHTTPClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
