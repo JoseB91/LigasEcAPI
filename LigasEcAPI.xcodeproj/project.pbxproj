@@ -16,6 +16,7 @@
 		B00CE15D2D6C260A00050613 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00CE1552D6C260A00050613 /* SharedTestHelpers.swift */; };
 		B00CE1862D6CC58C00050613 /* SharedAPI.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = B00CE1852D6CC58C00050613 /* SharedAPI.xctestplan */; };
 		B01EB4B92D681E2500859916 /* SharedAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01EB4AE2D681E2500859916 /* SharedAPI.framework */; };
+		B05361432D8207E600BE41F0 /* ImageMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05361422D8207E600BE41F0 /* ImageMapper.swift */; };
 		B0FFEDB92D690E110058D1C0 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FFEDB52D690E110058D1C0 /* HTTPClient.swift */; };
 		B0FFEDBA2D690E110058D1C0 /* SharedAPI.docc in Sources */ = {isa = PBXBuildFile; fileRef = B0FFEDB62D690E110058D1C0 /* SharedAPI.docc */; };
 		B0FFEDBB2D690E110058D1C0 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FFEDB72D690E110058D1C0 /* URLSessionHTTPClient.swift */; };
@@ -52,6 +53,7 @@
 		B00CE1872D6CC61D00050613 /* SharedAPI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = SharedAPI.xctestplan; path = SharedAPITests/SharedAPI.xctestplan; sourceTree = "<group>"; };
 		B01EB4AE2D681E2500859916 /* SharedAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SharedAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01EB4B82D681E2500859916 /* SharedAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharedAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B05361422D8207E600BE41F0 /* ImageMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMapper.swift; sourceTree = "<group>"; };
 		B0FFEDB32D690E110058D1C0 /* SharedAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedAPI.h; sourceTree = "<group>"; };
 		B0FFEDB52D690E110058D1C0 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		B0FFEDB62D690E110058D1C0 /* SharedAPI.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = SharedAPI.docc; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				B00CDFFA2D6C152400050613 /* Header & Doc */,
 				B095843D2D6F6BD100C4B206 /* Team */,
 				B095842E2D6E628500C4B206 /* League */,
+				B05361422D8207E600BE41F0 /* ImageMapper.swift */,
 			);
 			path = LigasEcAPI;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B05361432D8207E600BE41F0 /* ImageMapper.swift in Sources */,
 				B00CDFF82D6C151D00050613 /* LigasEcAPI.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
