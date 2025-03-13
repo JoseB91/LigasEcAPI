@@ -92,9 +92,9 @@ public enum MapperError: Error {
 public struct Team: Hashable, Identifiable {
     public let id: String
     public let name: String
-    public let logoURL: URL?
+    public let logoURL: URL
     
-    public init(id: String, name: String, logoURL: URL?) {
+    public init(id: String, name: String, logoURL: URL) {
         self.id = id
         self.name = name
         self.logoURL = logoURL
