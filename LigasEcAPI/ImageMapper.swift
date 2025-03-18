@@ -8,13 +8,9 @@
 import Foundation
 
 public final class ImageMapper {
-    public enum Error: Swift.Error {
-        case invalidData
-    }
-
     public static func map(_ data: Data, from response: HTTPURLResponse) throws -> Data {
         guard response.isOK, !data.isEmpty else {
-            throw Error.invalidData
+            throw MapperError.unsuccessfullyResponse
         }
 
         return data
