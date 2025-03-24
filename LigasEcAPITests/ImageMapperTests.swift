@@ -10,29 +10,38 @@ import LigasEcAPI
 
 class ImageMapperTests: XCTestCase {
 
-    func test_map_throwsErrorOnNon200HTTPResponse() throws {
-        let samples = [199, 201, 300, 400, 500]
+    func test_map_deliversNonEmptyDataOn200HTTPResponse() throws {
+        // Arrange
+        let nonEmptyData = Data("non-empty data".utf8)
 
-        try samples.forEach { code in
-            XCTAssertThrowsError(
-                try ImageMapper.map(anyData(), from: HTTPURLResponse(statusCode: code))
-            )
-        }
+        // Act
+        let result = try ImageMapper.map(nonEmptyData,
+                                         from: HTTPURLResponse(statusCode: 200))
+
+        // Assert
+        XCTAssertEqual(result, nonEmptyData)
     }
-
-    func test_map_deliversInvalidDataErrorOn200HTTPResponseWithEmptyData() {
+    
+    func test_map_throwsUnsuccessfullyResponseErrorOn200HTTPResponseWithEmptyData() {
+        // Arrange
         let emptyData = Data()
 
+        // Act & Assert
         XCTAssertThrowsError(
             try ImageMapper.map(emptyData, from: HTTPURLResponse(statusCode: 200))
         )
     }
+    
+    func test_map_throwsUnsuccessfullyResponseErrorOnNon200HTTPResponse() throws {
+        // Arrange
+        let samples = [199, 201, 300, 400, 500]
 
-    func test_map_deliversReceivedNonEmptyDataOn200HTTPResponse() throws {
-        let nonEmptyData = Data("non-empty data".utf8)
-
-        let result = try ImageMapper.map(nonEmptyData, from: HTTPURLResponse(statusCode: 200))
-
-        XCTAssertEqual(result, nonEmptyData)
+        // Act & Assert
+        try samples.forEach { code in
+            XCTAssertThrowsError(
+                try ImageMapper.map(anyData(),
+                                    from: HTTPURLResponse(statusCode: code))
+            )
+        }
     }
 }
