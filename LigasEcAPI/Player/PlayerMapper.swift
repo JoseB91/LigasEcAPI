@@ -10,7 +10,7 @@ import Foundation
 public final class PlayerMapper {
         
     // MARK: - Root
-    private struct Root: Codable {
+    private struct RootFlashLive: Codable {
         let data: [Datum]
         
         var squad: [Player] {
@@ -19,8 +19,9 @@ public final class PlayerMapper {
                     Player(id: item.playerID,
                            name: item.playerName,
                            number: item.playerJerseyNumber ?? 0,
-                           position: item.playerTypeID.rawValue,
-                           photoURL: item.playerImagePath)
+                           position: item.playerTypeID.spanishName,
+                           photoURL: item.playerImagePath,
+                           dataSource: .FlashLive)
                 }
             }
         }
@@ -63,19 +64,74 @@ public final class PlayerMapper {
                 case forward = "FORWARD"
                 case goalkeeper = "GOALKEEPER"
                 case midfielder = "MIDFIELDER"
+                
+                var spanishName: String {
+                    switch self {
+                    case .coach:
+                        return "Entrenador"
+                    case .defender:
+                        return "Defensa"
+                    case .forward:
+                        return "Delantero"
+                    case .goalkeeper:
+                        return "Portero"
+                    case .midfielder:
+                        return "Centrocampista"
+                    }
+                }
             }
         }
     }
             
-    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> [Player] {
+    private struct RootTransferMarket: Codable {
+        let squadCodable: [SquadCodable]
+        
+        enum CodingKeys: String, CodingKey {
+            case squadCodable = "squad"
+        }
+
+        var squad: [Player] {
+            squadCodable.compactMap {  Player(id: $0.id,
+                                              name: $0.name,
+                                              number: Int($0.shirtNumber ?? "0") ?? 0,
+                                              position: $0.positions?.first?.group ?? "",
+                                              photoURL: $0.image,
+                                              dataSource: .TransferMarket)
+                }
+        }
+
+        // MARK: - Squad
+        struct SquadCodable: Codable {
+            let id, name: String
+            let image: URL
+            let shirtNumber: String?
+            let positions: Positions?
+        }
+        
+        // MARK: - Positions
+        struct Positions: Codable {
+            let first, second, third: Position?
+        }
+        
+        // MARK: - First
+        struct Position: Codable {
+            let id, name, shortName, group: String
+        }
+    }
+    public static func map(_ data: Data, from response: HTTPURLResponse, with source: DataSource) throws -> [Player] {
         guard response.isOK else {
             throw MapperError.unsuccessfullyResponse
         }
         
         do {
-            //print(String(data: data, encoding: .utf8) ?? "No Data")
-            let root = try JSONDecoder().decode(Root.self, from: data)
-            return root.squad
+            if source == .FlashLive {
+                //print(String(data: data, encoding: .utf8) ?? "No Data")
+                let root = try JSONDecoder().decode(RootFlashLive.self, from: data)
+                return root.squad
+            } else {
+                let root = try JSONDecoder().decode(RootTransferMarket.self, from: data)
+                return root.squad
+            }
         } catch {
             throw error
         }
@@ -88,12 +144,14 @@ public struct Player: Hashable, Identifiable {
     public let number: Int
     public let position: String
     public let photoURL: URL?
+    public let dataSource: DataSource
     
-    public init(id: String, name: String, number: Int, position: String, photoURL: URL?) {
+    public init(id: String, name: String, number: Int, position: String, photoURL: URL?, dataSource: DataSource) {
         self.id = id
         self.name = name
         self.number = number
         self.position = position
         self.photoURL = photoURL
+        self.dataSource = dataSource
     }
 }

@@ -9,14 +9,15 @@ import Foundation
 
 public final class TeamMapper {
     
-    private struct Root: Codable {
+    private struct RootFlashLive: Codable {
         let data: [Datum]
 
         var teams: [Team] {
             guard let firstData = data.first else { return [] }
             return firstData.rows.compactMap { Team(id: $0.teamID,
-                                               name: $0.teamName,
-                                               logoURL: $0.teamImagePath)
+                                                    name: $0.teamName,
+                                                    logoURL: $0.teamImagePath,
+                                                    dataSource: .FlashLive)
             }
         }
 
@@ -46,31 +47,37 @@ public final class TeamMapper {
         }
 
     }
-
-
-    private struct Root2: Decodable {
-        let response: [Response]
+    
+    private struct RootTransferMarket: Codable {
+        let clubs: [Club]
         
-                            
-        struct Response: Codable {
-            let team: ResponseTeam
-           
-            struct ResponseTeam: Codable {
-                let id: Int
-                let name: String
-                let logo: URL
+        var teams: [Team] {
+            clubs.compactMap { Team(id: $0.id,
+                                    name: $0.name,
+                                    logoURL: $0.image,
+                                    dataSource: .TransferMarket)
             }
+        }
+
+        struct Club: Codable {
+            let id, name: String
+            let image: URL
         }
     }
             
-    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> [Team] {
+    public static func map(_ data: Data, from response: HTTPURLResponse, with source: DataSource) throws -> [Team] {
         guard response.isOK else {
             throw MapperError.unsuccessfullyResponse
         }
         
         do {
-            let root = try JSONDecoder().decode(Root.self, from: data)
-            return root.teams
+            if source == .FlashLive {
+                let root = try JSONDecoder().decode(RootFlashLive.self, from: data)
+                return root.teams
+            } else {
+                let root = try JSONDecoder().decode(RootTransferMarket.self, from: data)
+                return root.teams
+            }            
         } catch {
             throw error
         }
@@ -93,10 +100,17 @@ public struct Team: Hashable, Identifiable {
     public let id: String
     public let name: String
     public let logoURL: URL
+    public let dataSource: DataSource
     
-    public init(id: String, name: String, logoURL: URL) {
+    public init(id: String, name: String, logoURL: URL, dataSource: DataSource) {
         self.id = id
         self.name = name
         self.logoURL = logoURL
+        self.dataSource = dataSource
     }
+}
+
+public enum DataSource {
+    case FlashLive
+    case TransferMarket
 }
