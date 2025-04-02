@@ -79,6 +79,76 @@ class URLSessionHTTPClientTests: XCTestCase {
         XCTAssertEqual(expectedResponse.url, url)
         XCTAssertEqual(expectedResponse.statusCode, mockedResponse.statusCode)
     }
+    
+    func test_getFromURL_failsWithError_havingError_withoutHost() async throws {
+        // Arrange
+        let url = anyURL()
+        let (sut, _) = makeSUT(result: .failure(anyNSError()))
+        
+        do {
+            //Act
+            _ = try await sut.get(from: url)
+            //Assert
+            XCTFail("Expected error, but the call succeeded.")
+        } catch let error as URLError {
+            //Assert
+            XCTAssertEqual(error.code, .cannotLoadFromNetwork)
+        } catch {
+            //Assert
+            XCTFail("Expected URLError, but received: \(error)")
+        }
+    }
+    
+    func test_getFromURL_failsWithBadServerResponse_havingNonHTTPURLResponse_withoutHost() async throws {
+        // Arrange
+        let url = anyURL()
+        let (sut, _) = makeSUT(result: .success((anyData(), nonHTTPURLResponse())))
+        
+        do {
+            //Act
+            _ = try await sut.get(from: url)
+            //Assert
+            XCTFail("Expected error, but the call succeeded.")
+        } catch let error as URLError {
+            //Assert
+            XCTAssertEqual(error.code, .badServerResponse)
+        } catch {
+            //Assert
+            XCTFail("Expected URLError, but received: \(error)")
+        }
+    }
+
+    func test_getFromURL_succeedsWithData_havingDataAndAnyHTTPURLResponse_withoutHost() async throws {
+        // Arrange
+        let url = anyURL()
+        let mockedData = anyData()
+        let mockedResponse = anyHTTPURLResponse()
+        let (sut, _) = makeSUT(result: .success((mockedData, mockedResponse)))
+
+        // Act
+        let (expectedData, expectedResponse) = try await sut.get(from: url)
+        
+        // Assert
+        XCTAssertEqual(expectedData, mockedData)
+        XCTAssertEqual(expectedResponse.url, url)
+        XCTAssertEqual(expectedResponse.statusCode, mockedResponse.statusCode)
+    }
+    
+    func test_getFromURL_succeedsWithEmptyData_havingEmptyDataAndAnyHTTPURLResponse_withoutHost() async throws {
+        // Arrange
+        let url = anyURL()
+        let emptyData = Data()
+        let mockedResponse = anyHTTPURLResponse()
+        let (sut, _) = makeSUT(result: .success((emptyData, mockedResponse)))
+        
+        // Act
+        let (expectedData, expectedResponse) = try await sut.get(from: url)
+        
+        // Assert
+        XCTAssertEqual(expectedData, emptyData)
+        XCTAssertEqual(expectedResponse.url, url)
+        XCTAssertEqual(expectedResponse.statusCode, mockedResponse.statusCode)
+    }
         
     // MARK: - Helpers
     

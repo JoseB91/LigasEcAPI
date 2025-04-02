@@ -41,4 +41,18 @@ public final class URLSessionHTTPClient: HTTPClient {
         
         return (data, httpResponse)
     }
+    
+    public func get(from url: URL) async throws -> (Data, HTTPURLResponse) {
+        let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 5.0)
+        
+        guard let (data, response) = try? await session.data(request: request, delegate: nil) else {
+            throw URLError(.cannotLoadFromNetwork)
+        }
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw URLError(.badServerResponse)
+        }
+        
+        return (data, httpResponse)
+    }
 }
