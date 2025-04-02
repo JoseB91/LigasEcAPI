@@ -17,7 +17,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         
         do {
             //Act
-            _ = try await sut.get(from: url)
+            _ = try await sut.get(from: url, with: "host")
             //Assert
             XCTFail("Expected error, but the call succeeded.")
         } catch let error as URLError {
@@ -36,7 +36,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         
         do {
             //Act
-            _ = try await sut.get(from: url)
+            _ = try await sut.get(from: url, with: "host")
             //Assert
             XCTFail("Expected error, but the call succeeded.")
         } catch let error as URLError {
@@ -56,7 +56,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         let (sut, _) = makeSUT(result: .success((mockedData, mockedResponse)))
 
         // Act
-        let (expectedData, expectedResponse) = try await sut.get(from: url)
+        let (expectedData, expectedResponse) = try await sut.get(from: url, with: "host")
         
         // Assert
         XCTAssertEqual(expectedData, mockedData)
@@ -72,7 +72,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         let (sut, _) = makeSUT(result: .success((emptyData, mockedResponse)))
         
         // Act
-        let (expectedData, expectedResponse) = try await sut.get(from: url)
+        let (expectedData, expectedResponse) = try await sut.get(from: url, with: "host")
         
         // Assert
         XCTAssertEqual(expectedData, emptyData)

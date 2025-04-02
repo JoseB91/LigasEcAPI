@@ -26,10 +26,10 @@ public final class URLSessionHTTPClient: HTTPClient {
         self.apiKey = apiKey
     }
             
-    public func get(from url: URL) async throws -> (Data, HTTPURLResponse) {
-        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 5.0)
+    public func get(from url: URL, with host: String) async throws -> (Data, HTTPURLResponse) {
+        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 8.0)
         request.setValue(apiKey, forHTTPHeaderField: "x-rapidapi-key")
-        request.setValue("flashlive-sports.p.rapidapi.com", forHTTPHeaderField: "x-rapidapi-host")
+        request.setValue(host, forHTTPHeaderField: "x-rapidapi-host")
         
         guard let (data, response) = try? await session.data(request: request, delegate: nil) else {
             throw URLError(.cannotLoadFromNetwork)
