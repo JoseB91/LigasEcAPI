@@ -8,15 +8,15 @@
 import Foundation
 
 public struct League: Hashable, Identifiable {
-    public let id: String // seasonId
-    public let stageId: String
+    public let id: String
     public let name: String
     public let logoURL: URL
+    public let dataSource: DataSource
     
-    public init(id: String, stageId: String, name: String, logoURL: URL) {
+    public init(id: String, name: String, logoURL: URL, dataSource: DataSource) {
         self.id = id
-        self.stageId = stageId
         self.name = name
         self.logoURL = logoURL
+        self.dataSource = dataSource
     }
 }
