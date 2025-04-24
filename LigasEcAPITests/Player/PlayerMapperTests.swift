@@ -51,9 +51,9 @@ final class PlayerMapperTests: XCTestCase {
         XCTAssertEqual(result, [item])
     }
     
-    func test_map_deliversItemsOn200HTTPResponseWithJSONItemsWithoutJerseyNumber_FlashLive() throws {
+    func test_map_deliversItemsOn200HTTPResponseWithJSONItemsWithoutNumber_FlashLive() throws {
         // Arrange
-        let item = makePlayerItemFlashLive2()
+        let item = makePlayerItemFlashLiveWithoutNumber()
         let jsonString = """
         {\"DATA\":[{\"GROUP_ID\":12,\"GROUP_LABEL\":\"Goalkeepers\",\"ITEMS\":[{\"PLAYER_ID\":\"S0nWKdXm\",\"PLAYER_NAME\":\"Contreras Jose\",\"PLAYER_TYPE_ID\":\"GOALKEEPER\",\"PLAYER_FLAG_ID\":205,\"PLAYER_IMAGE_PATH\":\"https://www.flashscore.com/res/image/data/WKTYkjyS-nFdH6Slk.png\"}]}]}
 """
@@ -67,24 +67,24 @@ final class PlayerMapperTests: XCTestCase {
         XCTAssertEqual(result, [item])
     }
     
-    func test_map_deliversItemsOn200HTTPResponseWithJSONItemsWithoutOtherPositions_FlashLive() throws {
+    func test_map_deliversItemsOn200HTTPResponseWithJSONItemsWithoutNumberAndWithOtherPositions_FlashLive() throws {
         // Arrange
-        let item3 = makePlayerItemFlashLive3()
+        let item3 = makePlayerItemFlashLiveWithoutNumberAndDefender()
         let jsonString3 = """
         {\"DATA\":[{\"GROUP_ID\":12,\"GROUP_LABEL\":\"Goalkeepers\",\"ITEMS\":[{\"PLAYER_ID\":\"S0nWKdXm\",\"PLAYER_NAME\":\"Contreras Jose\",\"PLAYER_TYPE_ID\":\"DEFENDER\",\"PLAYER_FLAG_ID\":205,\"PLAYER_IMAGE_PATH\":\"https://www.flashscore.com/res/image/data/WKTYkjyS-nFdH6Slk.png\"}]}]}
 """
         
-        let item4 = makePlayerItemFlashLive4()
+        let item4 = makePlayerItemFlashLiveWithoutNumberAndMidfielder()
         let jsonString4 = """
         {\"DATA\":[{\"GROUP_ID\":12,\"GROUP_LABEL\":\"Goalkeepers\",\"ITEMS\":[{\"PLAYER_ID\":\"S0nWKdXm\",\"PLAYER_NAME\":\"Contreras Jose\",\"PLAYER_TYPE_ID\":\"MIDFIELDER\",\"PLAYER_FLAG_ID\":205,\"PLAYER_IMAGE_PATH\":\"https://www.flashscore.com/res/image/data/WKTYkjyS-nFdH6Slk.png\"}]}]}
 """
         
-        let item5 = makePlayerItemFlashLive5()
+        let item5 = makePlayerItemFlashLiveWithoutNumberAndForward()
         let jsonString5 = """
         {\"DATA\":[{\"GROUP_ID\":12,\"GROUP_LABEL\":\"Goalkeepers\",\"ITEMS\":[{\"PLAYER_ID\":\"S0nWKdXm\",\"PLAYER_NAME\":\"Contreras Jose\",\"PLAYER_TYPE_ID\":\"FORWARD\",\"PLAYER_FLAG_ID\":205,\"PLAYER_IMAGE_PATH\":\"https://www.flashscore.com/res/image/data/WKTYkjyS-nFdH6Slk.png\"}]}]}
 """
         
-        let item6 = makePlayerItemFlashLive6()
+        let item6 = makePlayerItemFlashLiveWithoutNumberAndCoach()
         let jsonString6 = """
         {\"DATA\":[{\"GROUP_ID\":12,\"GROUP_LABEL\":\"Goalkeepers\",\"ITEMS\":[{\"PLAYER_ID\":\"S0nWKdXm\",\"PLAYER_NAME\":\"Contreras Jose\",\"PLAYER_TYPE_ID\":\"COACH\",\"PLAYER_FLAG_ID\":205,\"PLAYER_IMAGE_PATH\":\"https://www.flashscore.com/res/image/data/WKTYkjyS-nFdH6Slk.png\"}]}]}
 """
@@ -128,9 +128,9 @@ final class PlayerMapperTests: XCTestCase {
         XCTAssertEqual(result, [item])
     }
     
-    func test_map_deliversItemsOn200HTTPResponseWithJSONItemsWithoutJerseyNumber_TransferMarket() throws {
+    func test_map_deliversItemsOn200HTTPResponseWithJSONItemsWithoutNumber_TransferMarket() throws {
         // Arrange
-        let item = makePlayerItemTransferMarket2()
+        let item = makePlayerItemTransferMarketWithoutNumber()
         let jsonString = """
         {\"squad\":[{\"height\":\"1,75\",\"foot\":\"Izquierdo\",\"injury\":null,\"suspension\":null,\"joined\":1740265200,\"contractUntil\":1767135600,\"captain\":true,\"lastClub\":null,\"isLoan\":null,\"wasLoan\":null,\"id\":\"106495\",\"name\":\"Jonathan de la Cruz\",\"image\":\"https://img.a.transfermarkt.technology/portrait/medium/106495-1733949391.JPG?lm=1\",\"imageLarge\":null,\"imageSource\":\"IDV Prensa\",\"shirtNumber\":\"ocho\",\"age\":32,\"dateOfBirth\":711410400,\"heroImage\":null,\"isGoalkeeper\":false,\"positions\":{\"first\":{\"id\":\"10\",\"name\":\"Mediocentro ofensivo\",\"shortName\":\"MCO\",\"group\":\"Centrocampista\"},\"second\":{\"id\":\"6\",\"name\":\"Pivote\",\"shortName\":\"PIV\",\"group\":\"Centrocampista\"},\"third\":{\"id\":\"11\",\"name\":\"Extremo izquierdo\",\"shortName\":\"EI\",\"group\":\"Delantero\"}},\"nationalities\":[{\"id\":44,\"name\":\"Ecuador\",\"image\":\"https://tmssl.akamaized.net//images/flagge/small/44.png?lm=1520611569\"}],\"marketValue\":{\"value\":25000,\"currency\":\"€\",\"progression\":null}}]}
 """
@@ -144,25 +144,9 @@ final class PlayerMapperTests: XCTestCase {
         XCTAssertEqual(result, [item])
     }
     
-    func test_map_deliversItemsOn200HTTPResponseWithJSONItemsWithWrongJerseyNumber_TransferMarket() throws {
-        // Arrange
-        let item = makePlayerItemTransferMarket2()
-        let jsonString = """
-        {\"squad\":[{\"height\":\"1,75\",\"foot\":\"Izquierdo\",\"injury\":null,\"suspension\":null,\"joined\":1740265200,\"contractUntil\":1767135600,\"captain\":true,\"lastClub\":null,\"isLoan\":null,\"wasLoan\":null,\"id\":\"106495\",\"name\":\"Jonathan de la Cruz\",\"image\":\"https://img.a.transfermarkt.technology/portrait/medium/106495-1733949391.JPG?lm=1\",\"imageLarge\":null,\"imageSource\":\"IDV Prensa\",\"age\":32,\"dateOfBirth\":711410400,\"heroImage\":null,\"isGoalkeeper\":false,\"positions\":{\"first\":{\"id\":\"10\",\"name\":\"Mediocentro ofensivo\",\"shortName\":\"MCO\",\"group\":\"Centrocampista\"},\"second\":{\"id\":\"6\",\"name\":\"Pivote\",\"shortName\":\"PIV\",\"group\":\"Centrocampista\"},\"third\":{\"id\":\"11\",\"name\":\"Extremo izquierdo\",\"shortName\":\"EI\",\"group\":\"Delantero\"}},\"nationalities\":[{\"id\":44,\"name\":\"Ecuador\",\"image\":\"https://tmssl.akamaized.net//images/flagge/small/44.png?lm=1520611569\"}],\"marketValue\":{\"value\":25000,\"currency\":\"€\",\"progression\":null}}]}
-"""
-        let json = jsonString.makeJSON()
-
-        // Act
-        let result = try PlayerMapper.map(json,
-                                          from: HTTPURLResponse(statusCode: 200), with: .TransferMarket)
-
-        // Assert
-        XCTAssertEqual(result, [item])
-    }
-    
     func test_map_deliversItemsOn200HTTPResponseWithJSONItemsWithoutPosition_TransferMarket() throws {
         // Arrange
-        let item = makePlayerItemTransferMarket3()
+        let item = makePlayerItemTransferMarketWithoutNumberAndWithNationality()
         let jsonString = """
         {\"squad\":[{\"height\":\"1,75\",\"foot\":\"Izquierdo\",\"injury\":null,\"suspension\":null,\"joined\":1740265200,\"contractUntil\":1767135600,\"captain\":true,\"lastClub\":null,\"isLoan\":null,\"wasLoan\":null,\"id\":\"106495\",\"name\":\"Jonathan de la Cruz\",\"image\":\"https://img.a.transfermarkt.technology/portrait/medium/106495-1733949391.JPG?lm=1\",\"imageLarge\":null,\"imageSource\":\"IDV Prensa\",\"age\":32,\"dateOfBirth\":711410400,\"heroImage\":null,\"isGoalkeeper\":false,\"nationalities\":[{\"id\":44,\"name\":\"Ecuador\",\"image\":\"https://tmssl.akamaized.net//images/flagge/small/44.png?lm=1520611569\"}],\"marketValue\":{\"value\":25000,\"currency\":\"€\",\"progression\":null}}]}
 """
@@ -184,51 +168,57 @@ final class PlayerMapperTests: XCTestCase {
                name: "Contreras Jose",
                number: 1,
                position: "Portero",
+               flagId: 205,
                photoURL: URL(string: "https://www.flashscore.com/res/image/data/WKTYkjyS-nFdH6Slk.png")!,
                dataSource: .FlashLive)
     }
     
-    private func makePlayerItemFlashLive2() -> Player {
+    private func makePlayerItemFlashLiveWithoutNumber() -> Player {
         Player(id: "S0nWKdXm",
                name: "Contreras Jose",
-               number: 0,
+               number: nil,
                position: "Portero",
+               flagId: 205,
                photoURL: URL(string: "https://www.flashscore.com/res/image/data/WKTYkjyS-nFdH6Slk.png")!,
                dataSource: .FlashLive)
     }
     
-    private func makePlayerItemFlashLive3() -> Player {
+    private func makePlayerItemFlashLiveWithoutNumberAndDefender() -> Player {
         Player(id: "S0nWKdXm",
                name: "Contreras Jose",
-               number: 0,
+               number: nil,
                position: "Defensa",
+               flagId: 205,
                photoURL: URL(string: "https://www.flashscore.com/res/image/data/WKTYkjyS-nFdH6Slk.png")!,
                dataSource: .FlashLive)
     }
     
-    private func makePlayerItemFlashLive4() -> Player {
+    private func makePlayerItemFlashLiveWithoutNumberAndMidfielder() -> Player {
         Player(id: "S0nWKdXm",
                name: "Contreras Jose",
-               number: 0,
+               number: nil,
                position: "Centrocampista",
+               flagId: 205,
                photoURL: URL(string: "https://www.flashscore.com/res/image/data/WKTYkjyS-nFdH6Slk.png")!,
                dataSource: .FlashLive)
     }
     
-    private func makePlayerItemFlashLive5() -> Player {
+    private func makePlayerItemFlashLiveWithoutNumberAndForward() -> Player {
         Player(id: "S0nWKdXm",
                name: "Contreras Jose",
-               number: 0,
+               number: nil,
                position: "Delantero",
+               flagId: 205,
                photoURL: URL(string: "https://www.flashscore.com/res/image/data/WKTYkjyS-nFdH6Slk.png")!,
                dataSource: .FlashLive)
     }
     
-    private func makePlayerItemFlashLive6() -> Player {
+    private func makePlayerItemFlashLiveWithoutNumberAndCoach() -> Player {
         Player(id: "S0nWKdXm",
                name: "Contreras Jose",
-               number: 0,
+               number: nil,
                position: "Entrenador",
+               flagId: 205,
                photoURL: URL(string: "https://www.flashscore.com/res/image/data/WKTYkjyS-nFdH6Slk.png")!,
                dataSource: .FlashLive)
     }
@@ -238,24 +228,27 @@ final class PlayerMapperTests: XCTestCase {
                name: "Jonathan de la Cruz",
                number: 8,
                position: "Centrocampista",
+               nationality: "Ecuador",
                photoURL: URL(string: "https://img.a.transfermarkt.technology/portrait/medium/106495-1733949391.JPG?lm=1")!,
                dataSource: .TransferMarket)
     }
     
-    private func makePlayerItemTransferMarket2() -> Player {
+    private func makePlayerItemTransferMarketWithoutNumber() -> Player {
         Player(id: "106495",
                name: "Jonathan de la Cruz",
-               number: 0,
+               number: nil,
                position: "Centrocampista",
+               nationality: "Ecuador",
                photoURL: URL(string: "https://img.a.transfermarkt.technology/portrait/medium/106495-1733949391.JPG?lm=1")!,
                dataSource: .TransferMarket)
     }
     
-    private func makePlayerItemTransferMarket3() -> Player {
+    private func makePlayerItemTransferMarketWithoutNumberAndWithNationality() -> Player {
         Player(id: "106495",
                name: "Jonathan de la Cruz",
-               number: 0,
+               number: nil,
                position: "",
+               nationality: "Ecuador",
                photoURL: URL(string: "https://img.a.transfermarkt.technology/portrait/medium/106495-1733949391.JPG?lm=1")!,
                dataSource: .TransferMarket)
     }

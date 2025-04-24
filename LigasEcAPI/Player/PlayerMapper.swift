@@ -18,8 +18,9 @@ public final class PlayerMapper {
                 group.items.compactMap { item in
                     Player(id: item.playerID,
                            name: item.playerName,
-                           number: item.playerJerseyNumber ?? 0,
+                           number: item.playerJerseyNumber,
                            position: item.playerTypeID.spanishName,
+                           flagId: item.playerFlagID,
                            photoURL: item.playerImagePath,
                            dataSource: .FlashLive)
                 }
@@ -93,8 +94,9 @@ public final class PlayerMapper {
         var squad: [Player] {
             squadCodable.compactMap {  Player(id: $0.id,
                                               name: $0.name,
-                                              number: Int($0.shirtNumber ?? "0") ?? 0,
+                                              number: $0.shirtNumber != nil ? Int($0.shirtNumber!) : nil,
                                               position: $0.positions?.first?.group ?? "",
+                                              nationality: $0.nationalities.first?.name,
                                               photoURL: $0.image,
                                               dataSource: .TransferMarket)
                 }
@@ -106,17 +108,23 @@ public final class PlayerMapper {
             let image: URL
             let shirtNumber: String?
             let positions: Positions?
+            let nationalities: [Nationality]
         }
         
-        // MARK: - Positions
         struct Positions: Codable {
             let first, second, third: Position?
         }
         
-        // MARK: - First
         struct Position: Codable {
             let id, name, shortName, group: String
         }
+        
+        struct Nationality: Codable {
+            let id: Int
+            let name: String
+            let imageURL: URL?
+        }
+
     }
     public static func map(_ data: Data, from response: HTTPURLResponse, with source: DataSource) throws -> [Player] {
         guard response.isOK else {
@@ -125,7 +133,6 @@ public final class PlayerMapper {
         
         do {
             if source == .FlashLive {
-                //print(String(data: data, encoding: .utf8) ?? "No Data")
                 let root = try JSONDecoder().decode(RootFlashLive.self, from: data)
                 return root.squad
             } else {
@@ -141,16 +148,20 @@ public final class PlayerMapper {
 public struct Player: Hashable, Identifiable {
     public let id: String
     public let name: String
-    public let number: Int
+    public let number: Int?
     public let position: String
+    public let flagId: Int?
+    public let nationality: String?
     public let photoURL: URL?
     public let dataSource: DataSource
     
-    public init(id: String, name: String, number: Int, position: String, photoURL: URL?, dataSource: DataSource) {
+    public init(id: String, name: String, number: Int?, position: String, flagId: Int? = nil, nationality: String? = nil, photoURL: URL?, dataSource: DataSource) {
         self.id = id
         self.name = name
         self.number = number
         self.position = position
+        self.flagId = flagId
+        self.nationality = nationality
         self.photoURL = photoURL
         self.dataSource = dataSource
     }
